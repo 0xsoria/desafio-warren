@@ -1,4 +1,4 @@
-// swift-tools-version:5.1
+// swift-tools-version:5.3
 
 /**
  This Package defines the modular architecture used by our app.
@@ -14,7 +14,7 @@ import PackageDescription
 let package = Package(
     name: "Modules",
     platforms: [
-        .iOS(.v13)
+        .iOS(.v14)
     ],
     products: [
         .library(
@@ -34,24 +34,7 @@ let package = Package(
             ]
         )
     ],
-    dependencies: [
-        .package(
-            url: "https://github.com/chrisaljoudi/swift-log-oslog.git",
-            from: "0.2.2"
-        ),
-        .package(
-            url: "https://github.com/kishikawakatsumi/KeychainAccess.git",
-            from: "4.2.1"
-        ),
-        .package(
-            url: "https://github.com/pointfreeco/swift-tagged.git",
-            from: "0.5.0"
-        ),
-        .package(
-            url: "https://github.com/Moya/Moya.git",
-            from: "14.0.0"
-        )
-    ],
+    dependencies: [],
     targets: [
         // MARK: - Root
 
@@ -60,8 +43,6 @@ let package = Package(
         .target(
             name: "RootElements",
             dependencies: [
-                "LoggingOSLog",
-                "Tagged"
             ]
         ),
         .testTarget(
@@ -76,9 +57,7 @@ let package = Package(
         .target(
             name: "CoreProviders",
             dependencies: [
-                "RootElements",
-                "KeychainAccess",
-                "Moya"
+                "RootElements"
             ]
         ),
         .testTarget(
