@@ -1,0 +1,3 @@
+
+LOGIN_API = enigmatic-bayou-48219.herokuapp.com/api/v2/account/login
+CONTENT_API = enigmatic-bayou-48219.herokuapp.com/api/v2/portfolios/mine
