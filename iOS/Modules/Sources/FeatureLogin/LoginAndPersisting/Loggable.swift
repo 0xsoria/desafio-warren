@@ -7,6 +7,7 @@
 
 import CoreProviders
 import Foundation
+import RootElements
 
 protocol Loggable {
     func login(user: UserLogin, completion: @escaping ((Result<UserToken, Error>) -> Void))
@@ -60,7 +61,7 @@ final class LoginSystem: Loggable {
         let userModel = User(email: user.email, password: user.password)
         let encodedModel = try? JSONEncoder().encode(userModel)
         let model = NetworkModel(urlString: "https://\(PlistKey.loginURL.getData())",
-                                 headers: [LoginAPIKeys.Login.contentType: LoginAPIKeys.Login.applicationJSON],
+                                 headers: [APIKeys.Keys.contentType: APIKeys.Keys.applicationJSON],
                                  httpMethod: .post,
                                  body: encodedModel ?? Data())
         return model

@@ -1,4 +1,5 @@
 import FeatureLogin
+import Goals
 import SwiftUI
 import RootElements
 
@@ -20,7 +21,7 @@ public struct MainView: View {
                 Color.black
                 VStack {
                     NavigationLink(
-                        destination: Next(),
+                        destination: GoalsMainView(),
                         isActive: self.$isLogged,
                         label: {})
                     MainButton(action: self.login,
@@ -45,11 +46,5 @@ public struct MainView: View {
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
         MainView()
-    }
-}
-
-struct Next: View {
-    var body: some View {
-        Text("Em desenvolvimento...")
     }
 }

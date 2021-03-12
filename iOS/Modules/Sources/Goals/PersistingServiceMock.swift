@@ -6,6 +6,7 @@
 //
 
 import CoreProviders
+import RootElements
 import Foundation
 
 final class PersistingServiceMock: Persistable {
@@ -14,14 +15,14 @@ final class PersistingServiceMock: Persistable {
     
     func save(account: String, password: String, service: String) throws {
         self.userDefaults.set([account: password],
-                              forKey: LoginAPIKeys.Login.passDefaults)
+                              forKey: APIKeys.Keys.passDefaults)
         guard self.userDefaults.dictionary(forKey: account) != nil else {
             throw NSError(domain: "Could not save on User Defaults", code: 0, userInfo: nil)
         }
     }
     
     func getPassword(for account: String, with service: String) throws -> String {
-        guard let dictionary = self.userDefaults.dictionary(forKey: LoginAPIKeys.Login.passDefaults) as? [String: String],
+        guard let dictionary = self.userDefaults.dictionary(forKey: APIKeys.Keys.passDefaults) as? [String: String],
               let password = dictionary[account]  else {
             throw NSError(domain: "Could not save on User Defaults",
                           code: 0,
@@ -32,28 +33,19 @@ final class PersistingServiceMock: Persistable {
     
     func save(accessToken: String, refreshToken: String) throws {
         self.userDefaults.set([TokenKeys.accessToken.rawValue: accessToken,
-                               TokenKeys.refreshToken.rawValue: refreshToken], forKey: LoginAPIKeys.Login.tokenDefaults)
+                               TokenKeys.refreshToken.rawValue: refreshToken], forKey: APIKeys.Keys.tokenDefaults)
         
-        guard self.userDefaults.dictionary(forKey: LoginAPIKeys.Login.tokenDefaults) != nil else {
+        guard self.userDefaults.dictionary(forKey: APIKeys.Keys.tokenDefaults) != nil else {
             throw NSError(domain: "Could not save on User Defaults", code: 0, userInfo: nil)
         }
     }
     
     func getToken() throws -> [String: String] {
-        guard let dictionary = self.userDefaults.dictionary(forKey: LoginAPIKeys.Login.tokenDefaults) as? [String: String] else {
+        guard let dictionary = self.userDefaults.dictionary(forKey: APIKeys.Keys.tokenDefaults) as? [String: String] else {
             throw NSError(domain: "Could not save on User Defaults",
                           code: 0,
                           userInfo: nil)
         }
         return dictionary
-    }
-    
-    func saveUserToken(token: UserToken) throws {
-        self.userDefaults.set([TokenKeys.accessToken.rawValue: token.accessToken,
-                               TokenKeys.refreshToken.rawValue: token.refreshToken], forKey: LoginAPIKeys.Login.tokenDefaults)
-        
-        guard self.userDefaults.dictionary(forKey: LoginAPIKeys.Login.tokenDefaults) != nil else {
-            throw NSError(domain: "Could not save on User Defaults", code: 0, userInfo: nil)
-        }
     }
 }
