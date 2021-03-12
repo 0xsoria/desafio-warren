@@ -24,7 +24,8 @@ final class GoalsProvider: ObservableObject {
     func requestGoals() {
         self.isLoading = true
         guard let token = self.getAccessToken() else {
-            
+            self.isLoading = false
+            self.errorLoading = true
             return
         }
         self.goalsService?.requestGoals(token: token, completion: { (result: Result<GoalsModel, NetworkError>) in
