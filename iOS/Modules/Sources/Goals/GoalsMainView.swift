@@ -53,14 +53,12 @@ public struct GoalsMainView: View {
     }
     
     var goalsList: some View {
-        ZStack {
-            Color.black
-            List {
-                ForEach(self.goalsProvider.goals?.portfolios ?? [PortifolioModel](), id: \.self) { item in
-                    GoalCellView(item: item).listRowBackground(Color.black)
-                }
-            }.background(Color.black)
-        }
+        List {
+            ForEach(self.goalsProvider.goals?.portfolios ?? [PortifolioModel](), id: \.self) { item in
+                GoalCellView(item: item).listRowBackground(Color.black)
+            }
+        }.environment(\.defaultMinListRowHeight, 150)
+        .navigationBarTitle("Carteiras")
     }
     
     var logoutButton: some View {
