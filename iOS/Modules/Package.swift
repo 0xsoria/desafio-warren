@@ -82,10 +82,14 @@ let package = Package(
                 "FeatureLogin"
             ]
         ),
+        .target(name: "Goals",
+                dependencies: ["CoreProviders"],
+                resources: [.process("Resources")]),
         
-        .target(name: "Goals"),
-        .testTarget(name: "Goals-Tests", dependencies: ["Goals"]),
-
+        .testTarget(name: "Goals-Tests",
+                    dependencies: ["Goals"],
+                    resources: [.copy("Resources")]
+        ),
         // MARK: - App
         .target(
             name: "App",

@@ -57,7 +57,8 @@ final class NetworkImageOperation: AsyncOperation {
     private func placeholderImage() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             defer { self.state = .finished }
-            guard let urlPlaceholder = Bundle.main.url(forResource: "placeholder", withExtension: "jpeg"),
+            guard let urlPlaceholder = Bundle.module.url(forResource: "placeholder",
+                                                          withExtension: "jpeg"),
                   let img = try? Data(contentsOf: urlPlaceholder) else {
                 return
             }

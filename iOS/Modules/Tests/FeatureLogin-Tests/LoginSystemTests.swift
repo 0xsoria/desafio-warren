@@ -33,6 +33,7 @@ final class LoginSystemTests: XCTestCase {
     func testLoginFailure() {
         let expectation = XCTestExpectation(description: "Expect Data not to be nil")
         self.sut = LoginSystem(network: NetworkMockError())
+        self.sut?.defineNewNetworkModel(model: NetworkMockError())
         self.sut?.login(user: User(email: String(), password: String()), completion: { (result: Result<UserToken, Error>) in
             switch result {
             case .success:
