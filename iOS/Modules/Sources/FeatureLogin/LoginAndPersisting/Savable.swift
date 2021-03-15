@@ -20,7 +20,7 @@ final class PersistingSystem: Savable {
         #if DEBUG
         self.service = PersistingService()
         #else
-        self.service = PersistingServiceMock()
+        self.service = service
         #endif
     }
 
